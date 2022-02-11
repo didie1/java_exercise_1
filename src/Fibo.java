@@ -20,7 +20,7 @@ public class Fibo implements Command{
             throw new IllegalArgumentException("Can't be negative");
         }
         int n1 = 0, n2 = 1, result = 0;
-        for (int i = 0; i < input_number -1; ++i)
+        for (int i = 0; i < input_number -1; i++)
         {
             result = n1 + n2;
             n1 = n2;

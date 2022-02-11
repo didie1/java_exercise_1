@@ -12,21 +12,21 @@ public class Launcher {
         Command com_choice = null;
         boolean stop_loop = false, exist = false;
         do {
-            System.out.println();
+            com_choice = null;
             String input = scan.nextLine();
-            scan.nextLine();
             for (Command c : list_cmd) {
                 if (c.name().equals(input)) {
                     exist = true;
                     com_choice = c;
                     break;
-                } else
-                    System.out.println("Unknown command");
+                }
             }
-            if (exist) {
+            if (exist && com_choice != null) {
                         stop_loop = com_choice.run(scan);
             }
-        } while (!stop_loop);
+            else
+                System.out.println("Unknown command");
+        } while (!stop_loop || com_choice == null);
         scan.close();
     }
 }

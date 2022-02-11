@@ -17,7 +17,7 @@ public class Freq implements Command{
         {
             String content = Files.readString(filePath);
             content = content.toLowerCase();
-            content = content.replaceAll("^[a-z]"," ");
+            content = content.replaceAll("[a-z]"," ");
             String[] listMessage = content.split(" ");
             Stream<String> streamMessage = Arrays.stream(listMessage);
             Map<String, Long> freqMap = streamMessage
@@ -38,10 +38,24 @@ public class Freq implements Command{
     @Override
     public boolean run(Scanner scan) {
         System.out.println("Please type in the explicit path where the text file is stored");
-        String path = scan.nextLine();
-        scan.nextLine();
-        Path filePath = Paths.get(path);
-        freq(filePath);
+
+        try
+        {
+            String path = scan.nextLine();
+            String content = Files.readString(Paths.get(path));
+            content = content.toLowerCase();
+            content = content.replaceAll("[^a-z]"," ");
+            String[] listMessage = content.split(" ");
+            Stream<String> streamMessage = Arrays.stream(listMessage).filter(s -> !s.isBlank());
+            Map<String, Long> freqMap = streamMessage
+                    .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
+            freqMap.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).limit(3)
+                    .forEachOrdered(e -> System.out.println(e.getKey()));
+        }
+        catch (IOException e)
+        {
+            System.out.println("Unreadable file: " + e.getClass() + e.getMessage());
+        }
         return false;
     }
 }
