@@ -50,7 +50,7 @@ public class Freq implements Command{
             Map<String, Long> freqMap = streamMessage
                     .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
             freqMap.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).limit(3)
-                    .forEachOrdered(e -> System.out.println(e.getKey()));
+                    .forEachOrdered(e -> System.out.print(e.getKey() + " "));
         }
         catch (IOException e)
         {
