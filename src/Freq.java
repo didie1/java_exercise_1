@@ -17,7 +17,7 @@ public class Freq implements Command{
         {
             String content = Files.readString(filePath);
             content = content.toLowerCase();
-            content = content.replaceAll("[a-z]"," ");
+            content = content.replaceAll("[^a-z]"," ");
             String[] listMessage = content.split(" ");
             Stream<String> streamMessage = Arrays.stream(listMessage);
             Map<String, Long> freqMap = streamMessage

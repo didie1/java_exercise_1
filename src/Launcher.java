@@ -3,12 +3,13 @@ import java.util.*;
 public class Launcher {
     public static void main(String[] args)
     {
-        System.out.println("Welcome! Please type the command freq (most occurencies) or fibo (fibonnaci) and quit to stop ");
+        System.out.println("Welcome! Please type the command freq, fibo, predict or quit to stop ");
         Scanner scan = new Scanner(System.in);
         List<Command> list_cmd = new ArrayList<>();
         list_cmd.add(new Quit());
         list_cmd.add(new Fibo());
         list_cmd.add(new Freq());
+        list_cmd.add(new Predict());
         Command com_choice = null;
         boolean stop_loop = false, exist = false;
         do {
